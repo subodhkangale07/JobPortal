@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
-
+import {uploadImageToCloudinary} from '../utils/imageUploader.js'
 export const register = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, password, role } = req.body; // Fetch all from req body
@@ -138,16 +138,21 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, bio, skills } = req.body;
-
-        const file = req?.file;
+    
+        const file = req?.files?.file;
+        console.log("Logging files -- > ",req.files );
 
         console.log(" file " , file);
         let cloudResponse;
 
         // Check if file exists before processing
         if (file) {
-            const fileUri = getDataUri(file);
-            cloudResponse = await cloudinary?.uploader.upload(fileUri.content);
+            // const fileUri = getDataUri(file);
+            // cloudResponse = await cloudinary?.uploader.upload(fileUri.content);
+            const response = await uploadImageToCloudinary(file,"sbk");
+            console.log("File uploadded  ",response);
+            cloudResponse = response;
+
         }
         let skillArray;
         if (skills) {

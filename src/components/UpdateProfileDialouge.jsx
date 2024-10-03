@@ -50,11 +50,12 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             setLoading(true);
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
                 headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },                
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data' // Optional, axios may set this automatically for formData
+                },
                 withCredentials: true
             });
+            
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
                 toast.success(res.data.message);
