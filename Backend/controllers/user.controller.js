@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
+import { data } from 'autoprefixer';
 
 export const register = async (req, res) => {
     try {
@@ -191,7 +192,8 @@ export const updateProfile = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             message: "Server error.",
-            success: false
+            success: false,
+            data:error.message
         });
     }
 };
