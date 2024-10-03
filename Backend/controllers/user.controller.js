@@ -139,21 +139,23 @@ export const updateProfile = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, bio, skills } = req.body;
 
-        const file = req.file;
+        const file = req?.file;
+
+        console.log(" file " , file);
         let cloudResponse;
 
         // Check if file exists before processing
         if (file) {
             const fileUri = getDataUri(file);
-            cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+            cloudResponse = await cloudinary?.uploader.upload(fileUri.content);
         }
         let skillArray;
         if (skills) {
-            skillArray = skills.split(",");
+            skillArray = skills?.split(",");
         }
         
-        const userId = req.id; // Assuming req.user is set by authentication middleware
-        let user = await User.findById(userId);
+        const userId = req?.id; // Assuming req.user is set by authentication middleware
+        let user = await User?.findById(userId);
 
         if (!user) {
             return res.status(400).json({
