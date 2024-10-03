@@ -44,12 +44,15 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         if (input.file) {
             formData.append("file", input.file);
         }
+        const token=localStorage.getItem("token");
+        console.log("token",token);
         try {
             setLoading(true);
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },                
                 withCredentials: true
             });
             if (res.data.success) {
@@ -57,7 +60,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
                 toast.success(res.data.message);
             }
         } catch (error) {
-            console.log(error);
+            console.log("this is my error",error);
             toast.error(error.response.data.message);
         } finally{
             setLoading(false);

@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 const isAuthentication = async (req, res, next) => {
     try {
         // Extract token from cookies
-        const token = req.cookies.token;
+        const token = req?.cookies.token || req?.headers.authentication.token;
         console.log('Extracted Token:', token);
 
         // Check if token exists and is a string

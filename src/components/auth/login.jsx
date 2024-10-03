@@ -30,7 +30,7 @@ const Login = () => {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-
+    
         try {
             dispatch(setLoading(true)); // Start loading
             const res = await axios.post(`${USER_API_END_POINT}/login`, input, {
@@ -42,6 +42,8 @@ const Login = () => {
 
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
+                // console.log("user data",res.data.user.token);
+                localStorage.setItem("token",res.data.user.token);
                 navigate("/");
                 toast.success(res.data.message);
             }

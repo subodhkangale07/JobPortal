@@ -91,6 +91,7 @@ export const login = async (req, res) => {
             maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
             httpOnly: true,
             sameSite: 'strict',
+            token:token,
         });
 
         user = {
@@ -100,6 +101,7 @@ export const login = async (req, res) => {
             phoneNumber: user.phoneNumber,
             role: user.role,
             profile: user.profile,
+            token:token,
         };
 
         return res.status(200).json({
@@ -137,37 +139,39 @@ export const updateProfile = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, bio, skills } = req.body;
 
-        const file = req.file; // Assuming file handling will be implemented later
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
-        // console.log(fileUri);
-        // console.log(cloudResponse);
+        const file = req.file;
+        let cloudResponse;
 
-        
-        let skillArray;
-        if(skills){
-             skillArray = skills.split(",");
+        // Check if file exists before processing
+        if (file) {
+            const fileUri = getDataUri(file);
+            cloudResponse = await cloudinary.uploader.upload(fileUri.content);
         }
+        let skillArray;
+        if (skills) {
+            skillArray = skills.split(",");
+        }
+        
         const userId = req.id; // Assuming req.user is set by authentication middleware
         let user = await User.findById(userId);
 
         if (!user) {
             return res.status(400).json({
-                message: "User not found.", 
+                message: "User not found.",
                 success: false
             });
         }
 
         // Update user profile
-        if(fullName) user.fullName = fullName;
-        if(email) user.email = email;
-        if(phoneNumber) user.phoneNumber = phoneNumber;
-        if(bio) user.profile.bio = bio;
-        if(skills) user.profile.skills = skillArray;
+        if (fullName) user.fullName = fullName;
+        if (email) user.email = email;
+        if (phoneNumber) user.phoneNumber = phoneNumber;
+        if (bio) user.profile.bio = bio;
+        if (skills) user.profile.skills = skillArray;
 
-        if(cloudResponse){
-            user.profile.resume = cloudResponse?.secure_url;
-            // user.profile.resumeOriginalName = file?.originalname;
+        if (cloudResponse) {
+            user.profile.resume = cloudResponse.secure_url;
+            user.profile.resumeOriginalName = file.originalname; // Check file before accessing originalname
         }
 
         // Save updated user
@@ -179,8 +183,8 @@ export const updateProfile = async (req, res) => {
             email: user.email,
             phoneNumber: user.phoneNumber,
             role: user.role,
-            profile: user.profile
-        }
+            profile: user.profile,
+        };
 
         return res.status(200).json({
             message: "Profile updated successfully.",
@@ -192,7 +196,7 @@ export const updateProfile = async (req, res) => {
         return res.status(500).json({
             message: "Server error.",
             success: false,
-            data:error.message
+            data: error.message
         });
     }
 };
