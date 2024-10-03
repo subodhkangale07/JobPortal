@@ -166,8 +166,8 @@ export const updateProfile = async (req, res) => {
         if(skills) user.profile.skills = skillArray;
 
         if(cloudResponse){
-            user.profile.resume = cloudResponse.secure_url;
-            user.profile.resumeOriginalName = file.originalname;
+            user.profile.resume = cloudResponse?.secure_url;
+            user.profile.resumeOriginalName = file?.originalname;
         }
 
         // Save updated user
