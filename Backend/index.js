@@ -96,7 +96,8 @@ app.use(fileUpload({
 // CORS configuration to allow all origins
 const allowedOrigins = [
     'http://localhost:5173',
-    'https://job-hunt-vert.vercel.app'
+    'https://job-hunt-vert.vercel.app',
+    'https://job-portal-three-omega.vercel.app/',
 ];
 
 const corsOptions = {
