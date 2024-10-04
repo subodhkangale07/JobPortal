@@ -12,7 +12,7 @@ import { USER_API_END_POINT } from '@/utils/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading, setUser } from '@/redux/authSlice';
 import { Loader2 } from 'lucide-react';
-
+import LoginImage from '../../../src/assets/Login.jpg'
 const Login = () => {
 
     const [input, setInput] = useState({
@@ -80,7 +80,7 @@ const Login = () => {
                         </h2>
                     </div>
                     <img
-                        src='./src/assets/Login.jpg'
+                       src={LoginImage}
                         alt='Decorative 3D Objects'
                         className='w-full h-[400px] object-contain rounded-lg shadow-lg'
                     />
