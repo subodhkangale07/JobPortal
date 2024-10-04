@@ -101,11 +101,12 @@ const allowedOrigins = [
 ];
 
 const corsOptions = {
-     origin:true,
+    origin: true, // Allow all origins
     credentials: true // Allow credentials (cookies, authorization headers, etc.)
 };
 
-app.use(cors(corsOptions)); // Use the CORS middleware with defined options
+app.use(cors(corsOptions));
+ // Use the CORS middleware with defined options
 
 // API routes
 app.use("/api/v1/user", userRoute); // User-related routes
