@@ -12,6 +12,8 @@ import { useSelector } from 'react-redux'
 import useGetCompanyById from '@/hooks/useGetCompanyById'
 
 const CompanySetup = () => {
+    const token = localStorage.getItem('token');
+
     const params = useParams();
     useGetCompanyById(params.id); 
     
@@ -45,14 +47,21 @@ const CompanySetup = () => {
         if (input.file) {
             formData.append("file", input.file);
         }
+        formData.append('token',token);
+        // const token = localStorage.getItem('token');
+   
         try {
+            console.log("Calling compnay")
             setLoading(true);
-            const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`, formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                },
-                withCredentials: true
-            });
+            const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`, formData,  {headers:{
+                "Content-Type": "multipart/form-data",
+                Authorization: `Bearer ${token}`,
+            }});
+
+            console.log("Call Done")
+
+
+            console.log("Response is Here ",res);
             if (res.data.success) {
                 toast.success(res.data.message);
                 navigate("/admin/companies");
