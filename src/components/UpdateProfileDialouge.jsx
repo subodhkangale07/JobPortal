@@ -46,13 +46,14 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             formData.append("file", input.file);
         } 
 
-        //  const token = localStorage.getItem('token',token);
-        //  console.log("Token  fetched from ls  ", token)
+         const token = localStorage.getItem('token');
+
+         console.log("Token  fetched from ls  ", token)
 
         // fetche the token from cookie first
         // console.log("token",token);
 
-        // formData.append(token);
+        formData.append('token',token);
 
         try {
             setLoading(true);
