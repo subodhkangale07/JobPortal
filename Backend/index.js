@@ -94,12 +94,24 @@ app.use(fileUpload({
 }));
 
 // CORS configuration to allow all origins
+const allowedOrigins = [
+    'http://localhost:5173',
+    'https://job-hunt-vert.vercel.app'
+];
+
 const corsOptions = {
-    origin:true, 
-    credentials: true, // Enable credentials (if you have a specific origin, set it here)
+    origin: function (origin, callback) {
+        // Allow requests with no origin, like mobile apps or CURL requests
+        if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true // Allow credentials (cookies, authorization headers, etc.)
 };
 
-app.use(cors(corsOptions)); // Use CORS middleware
+app.use(cors(corsOptions)); // Use the CORS middleware with defined options
 
 // API routes
 app.use("/api/v1/user", userRoute); // User-related routes
