@@ -80,7 +80,7 @@ const Login = () => {
                         </h2>
                     </div>
                     <img
-                       src={LoginImage}
+                       src={'https://i.pinimg.com/originals/5a/af/d0/5aafd06edf6758b35765acdc0ee6939b.jpg'}
                         alt='Decorative 3D Objects'
                         className='w-full h-[400px] object-contain rounded-lg shadow-lg'
                     />
