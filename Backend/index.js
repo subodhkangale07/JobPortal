@@ -95,7 +95,7 @@ app.use(fileUpload({
 
 // CORS configuration to allow all origins
 const corsOptions = {
-    origin: '*', // Allow all origins
+    origin:true, 
     credentials: true, // Enable credentials (if you have a specific origin, set it here)
 };
 

@@ -19,11 +19,13 @@ const Navbar = () => {
 
     const logoutHandler = async () => {
         try {
+            console.log("Log out ")
             const res = await axios.get(`${USER_API_END_POINT}/logout`, { withCredentials: true });
-            if (res.data.success) {
+            console.log("Response " ,res)
+            if (res?.data?.success) {
                 dispatch(setUser(null));
                 navigate('/');
-                toast.success(res.data.message);
+                toast.success(res?.data?.message);
             }
         } catch (error) {
             console.log(error);

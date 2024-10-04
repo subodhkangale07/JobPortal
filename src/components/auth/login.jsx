@@ -40,10 +40,15 @@ const Login = () => {
                 withCredentials: true,
             });
 
+
+            console.log("Response of Login -->  ",res);
+            
+
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
                 // console.log("user data",res.data.user.token);
                 localStorage.setItem("token",res.data.user.token);
+                // console.log("token data",res.data.user.token);
                 navigate("/");
                 toast.success(res.data.message);
             }

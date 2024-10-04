@@ -121,10 +121,16 @@ export const login = async (req, res) => {
 // Logout function
 export const logout = async (req, res) => {
     try {
-        return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+        // return res.status(200).cookie("token", "", { maxAge: 0 }).json({
+        //     message: "Logged out successfully.",
+        //     success: true,
+        // });
+
+        return res.status(200).json({
             message: "Logged out successfully.",
             success: true,
         });
+        
     } catch (error) {
         console.log(error);
         return res.status(500).json({
@@ -138,7 +144,7 @@ export const logout = async (req, res) => {
 export const updateProfile = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, bio, skills } = req.body;
-    
+         console.log("Updating The Profile ");
         const file = req?.files?.file;
         console.log("Logging files -- > ",req.files );
 
@@ -178,10 +184,10 @@ export const updateProfile = async (req, res) => {
 
         if (cloudResponse) {
             user.profile.resume = cloudResponse.secure_url;
-            user.profile.resumeOriginalName = file.originalname; // Check file before accessing originalname
+            user.profile.resumeOriginalName = file.name; // Check file before accessing originalname
         }
 
-        // Save updated user
+        // Save updated user 
         await user.save();
 
         user = {

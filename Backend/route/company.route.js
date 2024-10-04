@@ -8,6 +8,6 @@ const router = express.Router();
 router.route("/register").post(isAuthentication,companyRegister);
 router.route("/get").get(isAuthentication,getCompany);
 router.route("/get/:id").get(isAuthentication,getCompanyById);
-router.route("/update/:id").put(isAuthentication,singleUpload,updateCompany);
+router.route("/update/:id").put(isAuthentication,updateCompany);
 
 export default router

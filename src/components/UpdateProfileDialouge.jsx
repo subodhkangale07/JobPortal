@@ -33,7 +33,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         setInput({ ...input, file })
     }
 
-    const submitHandler = async (e) => {
+     const submitHandler = async (e) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("fullName", input.fullName);
@@ -41,20 +41,32 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
         formData.append("phoneNumber", input.phoneNumber);
         formData.append("bio", input.bio);
         formData.append("skills", input.skills);
+
         if (input.file) {
             formData.append("file", input.file);
-        }
-        const token=localStorage.getItem("token");
-        console.log("token",token);
+        } 
+
+        //  const token = localStorage.getItem('token',token);
+        //  console.log("Token  fetched from ls  ", token)
+
+        // fetche the token from cookie first
+        // console.log("token",token);
+
+        // formData.append(token);
+
         try {
             setLoading(true);
+           
+           // make changes here so that token will be sent thouggh cookies and not through header 
+           console.log("Calling the Backend ");
             const res = await axios.post(`${USER_API_END_POINT}/profile/update`, formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data' // Optional, axios may set this automatically for formData
-                },
-                withCredentials: true
+                withCredentials: true 
             });
+
+
+            console.log(" ResPonse from bd ",res);
+
+            
             
             if (res.data.success) {
                 dispatch(setUser(res.data.user));
@@ -62,7 +74,7 @@ const UpdateProfileDialog = ({ open, setOpen }) => {
             }
         } catch (error) {
             console.log("this is my error",error);
-            toast.error(error.response.data.message);
+            toast.error(error.response?.data?.message);
         } finally{
             setLoading(false);
         }
