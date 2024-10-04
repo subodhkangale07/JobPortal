@@ -82,7 +82,7 @@ const Login = () => {
                     <img
                         src='./src/assets/Login.jpg'
                         alt='Decorative 3D Objects'
-                        className='w-full h-[400px] object-cover rounded-lg shadow-lg'
+                        className='w-full h-[400px] object-contain rounded-lg shadow-lg'
                     />
                 </div>
 
