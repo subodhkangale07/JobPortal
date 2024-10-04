@@ -13,9 +13,13 @@ const Applicants = () => {
     const {applicants} = useSelector(store=>store.application);
 
     useEffect(() => {
+        const token = localStorage.getItem('token')
         const fetchAllApplicants = async () => {
             try {
-                const res = await axios.get(`${APPLICATION_API_END_POINT}/${params.id}/applicants`, { withCredentials: true });
+                const res = await axios.get(`${APPLICATION_API_END_POINT}/${params.id}/applicants`,{headers:{
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`,
+                }}, { withCredentials: true });
                 dispatch(setAllApplicants(res.data.job));
             } catch (error) {
                 console.log(error);

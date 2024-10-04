@@ -39,17 +39,17 @@ const PostJob = () => {
     setInput({ ...input, companyId: selectedCompany._id })
   }
 
+  const token = localStorage.getItem('token');
+
   const submitHandler = async (e) => {
     e.preventDefault();
     
     try {
       setLaoding(true);
-      const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        withCredentials: true
-      });
+      const res = await axios.post(`${JOB_API_END_POINT}/post`, input, {headers:{
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${token}`,
+    }});
       if (res.data.success) {
         toast.success(res.data.message);
         navigate('/admin/jobs')

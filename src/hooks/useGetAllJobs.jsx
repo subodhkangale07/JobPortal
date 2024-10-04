@@ -8,10 +8,13 @@ const useGetAllJobs = () => {
   const dispatch = useDispatch();
   const {searchedQuery} = useSelector(store => store.job)
   useEffect(() => {
-
+     const token = localStorage.getItem('token');
     const fetchAllJobs = async () => {
       try {
-        const res = await axios.get(`${JOB_API_END_POINT}/get?keyword=${searchedQuery}`, { withCredentials: true });
+        const res = await axios.get(`${JOB_API_END_POINT}/get?keyword=${searchedQuery}`, {headers:{
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+      }},{ withCredentials: true });
         if (res.data.success) {
           dispatch(setAllJobs(res.data.jobs));
         }
