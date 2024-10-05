@@ -13,6 +13,7 @@ import { toast } from 'sonner';
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoading } from '@/redux/authSlice';
 import { Loader2 } from 'lucide-react';
+import sigUpImg from '../../assets/signUp.jpg'
 
 const Signup = () => {
     const [input, setInput] = useState({
@@ -97,7 +98,7 @@ const Signup = () => {
                         </h2>
                     </div>
                     <img
-                        src='./src/assets/signup.svg'
+                        src={sigUpImg}
                         alt='Decorative 3D Objects'
                         className='w-full h-96  lg:h-full object-cover rounded-lg shadow-lg'
                     />
