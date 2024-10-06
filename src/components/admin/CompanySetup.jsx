@@ -13,10 +13,9 @@ import useGetCompanyById from '@/hooks/useGetCompanyById'
 
 const CompanySetup = () => {
     const token = localStorage.getItem('token');
-
     const params = useParams();
     useGetCompanyById(params.id); 
-    
+
     const [input, setInput] = useState({
         name: "",
         description: "",
@@ -24,7 +23,8 @@ const CompanySetup = () => {
         location: "",
         file: null
     });
-    const {singleCompany} = useSelector(store=>store.company);
+
+    const { singleCompany } = useSelector(store => store.company);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -47,28 +47,24 @@ const CompanySetup = () => {
         if (input.file) {
             formData.append("file", input.file);
         }
-        formData.append('token',token);
-        // const token = localStorage.getItem('token');
-   
+        formData.append('token', token);
+
         try {
-            console.log("Calling compnay")
             setLoading(true);
-            const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`, formData,  {headers:{
-                "Content-Type": "multipart/form-data",
-                Authorization: `Bearer ${token}`,
-            }});
+            const res = await axios.put(`${COMPANY_API_END_POINT}/update/${params.id}`, formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                    Authorization: `Bearer ${token}`,
+                }
+            });
 
-            console.log("Call Done")
-
-
-            console.log("Response is Here ",res);
             if (res.data.success) {
                 toast.success(res.data.message);
                 navigate("/admin/companies");
             }
         } catch (error) {
-            console.log(error);
-            toast.error(error.response.data.message);
+            console.error(error);
+            toast.error(error.response?.data?.message || "An error occurred.");
         } finally {
             setLoading(false);
         }
@@ -82,21 +78,21 @@ const CompanySetup = () => {
             location: singleCompany.location || "",
             file: singleCompany.file || null
         })
-    },[singleCompany]);
+    }, [singleCompany]);
 
     return (
         <div>
             <Navbar />
-            <div className='max-w-xl mx-auto my-10'>
-                <form onSubmit={submitHandler}>
-                    <div className='flex items-center gap-5 p-8'>
+            <div className='max-w-xl mx-auto my-10 p-4'>
+                <form onSubmit={submitHandler} className='bg-white shadow-md rounded-lg p-6'>
+                    <div className='flex items-center gap-5 mb-6'>
                         <Button onClick={() => navigate("/admin/companies")} variant="outline" className="flex items-center gap-2 text-gray-500 font-semibold">
                             <ArrowLeft />
                             <span>Back</span>
                         </Button>
                         <h1 className='font-bold text-xl'>Company Setup</h1>
                     </div>
-                    <div className='grid grid-cols-2 gap-4'>
+                    <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                         <div>
                             <Label>Company Name</Label>
                             <Input
@@ -104,6 +100,8 @@ const CompanySetup = () => {
                                 name="name"
                                 value={input.name}
                                 onChange={changeEventHandler}
+                                className="mt-1"
+                                required
                             />
                         </div>
                         <div>
@@ -113,15 +111,19 @@ const CompanySetup = () => {
                                 name="description"
                                 value={input.description}
                                 onChange={changeEventHandler}
+                                className="mt-1"
+                                required
                             />
                         </div>
                         <div>
                             <Label>Website</Label>
                             <Input
-                                type="text"
+                                type="url"
                                 name="website"
                                 value={input.website}
                                 onChange={changeEventHandler}
+                                className="mt-1"
+                                required
                             />
                         </div>
                         <div>
@@ -131,6 +133,8 @@ const CompanySetup = () => {
                                 name="location"
                                 value={input.location}
                                 onChange={changeEventHandler}
+                                className="mt-1"
+                                required
                             />
                         </div>
                         <div>
@@ -139,17 +143,26 @@ const CompanySetup = () => {
                                 type="file"
                                 accept="image/*"
                                 onChange={changeFileHandler}
+                                className="mt-1"
                             />
                         </div>
                     </div>
-                    {
-                        loading ? <Button className="w-full my-4"> <Loader2 className='mr-2 h-4 w-4 animate-spin' /> Please wait </Button> : <Button type="submit" className="w-full my-4">Update</Button>
-                    }
+                    <div className='mt-6'>
+                        {
+                            loading ? (
+                                <Button className="w-full" disabled>
+                                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                                    Please wait
+                                </Button>
+                            ) : (
+                                <Button type="submit" className="w-full">Update</Button>
+                            )
+                        }
+                    </div>
                 </form>
             </div>
-
         </div>
     )
 }
 
-export default CompanySetup
+export default CompanySetup;

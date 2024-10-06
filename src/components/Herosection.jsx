@@ -16,9 +16,8 @@ const Herosection = () => {
     }
     
     return (
-        <div className='text-center'>
+        <div className='text-center mt-20'>
             <div className='flex flex-col gap-5 my-10'>
-                <span className='mx-auto px-4 py-2 rounded-full bg-gray-100 text-[#F83002]'>No.1 Job Finding Website</span>
                 <h1 className='text-5xl font-bold'>Seach, Apply & <br />Get your <span className='text-[#6A38C2]'>Dream Job</span></h1>
 
                 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse, accusantium! Deleniti provident accusamus corrupti.</p>
