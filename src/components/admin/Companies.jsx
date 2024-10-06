@@ -21,7 +21,7 @@ const Companies = () => {
     return (
         <div>
             <Navbar />
-            <div className='max-w-6xl mx-auto my-10 px-4 sm:px-6 lg:px-8'>
+            <div className='max-w-6xl mx-auto my-10 px-4 sm:px-6 lg:px-8 mt-20'>
                 <div className='flex items-center justify-between my-5'>
                     <Input
                         className='flex-1 mr-4 p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-teal-500'

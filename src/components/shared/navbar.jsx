@@ -35,7 +35,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-white shadow-md fixed top-0 left-0 w-full z-50'>
+        <div className='bg-white shadow-md fixed top-0 left-0 w-full z-50 mb-10'>
             <div className='flex justify-between items-center mx-auto max-w-7xl h-16 px-4'>
                 {/* Brand Name */}
                 <h1 className='text-2xl font-bold cursor-pointer' onClick={() => navigate('/')}>

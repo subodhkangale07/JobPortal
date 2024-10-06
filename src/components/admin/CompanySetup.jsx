@@ -83,7 +83,7 @@ const CompanySetup = () => {
     return (
         <div>
             <Navbar />
-            <div className='max-w-xl mx-auto my-10 p-4'>
+            <div className='max-w-xl mx-auto my-10 p-4 mt-20'>
                 <form onSubmit={submitHandler} className='bg-white shadow-md rounded-lg p-6'>
                     <div className='flex items-center gap-5 mb-6'>
                         <Button onClick={() => navigate("/admin/companies")} variant="outline" className="flex items-center gap-2 text-gray-500 font-semibold">

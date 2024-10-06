@@ -20,14 +20,14 @@ const AdminJobs = () => {
   }, [input, dispatch]);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-800">
+    <div className="min-h-screen bg-white text-gray-800">
       {/* Navbar component */}
-      <Navbar />
+      <Navbar/>
 
       {/* Main content container */}
-      <div className="max-w-6xl mx-auto p-6 my-10 bg-white shadow-lg rounded-lg">
+      <div className="max-w-6xl h-full mx-auto p-6 mt-24 bg-white shadow-lg rounded-lg ">
         {/* Title */}
-        <h1 className="text-2xl font-semibold text-gray-700 text-center mb-6">Admin Job Management</h1>
+        <h1 className="text-2xl font-semibold text-gray-700 text-center mb-6 ">Admin Job Management</h1>
 
         {/* Search and Add New Job actions */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 my-5">
