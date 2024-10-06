@@ -98,6 +98,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://job-hunt-vert.vercel.app',
     'https://job-portal-three-omega.vercel.app/',
+    'https://job-portal-three-omega.vercel.app'
 ];
 
 const corsOptions = {
