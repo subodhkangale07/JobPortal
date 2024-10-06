@@ -13,9 +13,12 @@ export const register = async (req, res) => {
                 success: false 
             });
         }
-        const file = req.file; // Assuming file handling will be implemented later
-        const fileUri = getDataUri(file);
-        const cloudResponse = await cloudinary.uploader.upload(fileUri.content);
+        const file = req?.files?.file; // Assuming file handling will be implemented later
+        // const fileUri = getDataUri(file);
+        let cloudResponse;
+        if(file){
+            cloudResponse = await uploadImageToCloudinary(file,'sbk');
+        }
 
         const existingUser = await User.findOne({ email }); // Check if email already exists
         if (existingUser) {
@@ -23,6 +26,7 @@ export const register = async (req, res) => {
                 message: "User with this email already exists.",
                 success: false, 
             });
+
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -33,7 +37,7 @@ export const register = async (req, res) => {
             password: hashedPassword,
             role,
             profile:{
-                profilePhoto:cloudResponse.secure_url,
+                profilePhoto:cloudResponse?.secure_url,
             }
         });
 
@@ -45,7 +49,8 @@ export const register = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             message: "Server error.",
-            success: false
+            success: false,
+            data:error.message,
         });
     }
 };
