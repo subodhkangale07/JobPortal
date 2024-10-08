@@ -1,4 +1,5 @@
-JobHunt
+# JobHunt
+
 A full-stack job portal application built using React.js, Vite, Express.js, Node.js, and MongoDB. The platform allows recruiters to post jobs, and students to apply for jobs and search for opportunities based on their skills and interests.
 
 Table of Contents
@@ -89,6 +90,7 @@ npm run dev: Start the backend server in development mode.
 npm start: Start the backend server in production mode.
 
 Folder Structure
+
 jobHunt/
 ├── client/         # Frontend
 │   ├── public/     # Static assets
