@@ -89,21 +89,20 @@ Server
 npm run dev: Start the backend server in development mode.
 npm start: Start the backend server in production mode.
 
-Folder Structure
-
 jobHunt/
-├── client/         # Frontend
-│   ├── public/     # Static assets
-│   ├── src/        # React components, pages, styles
-│   └── vite.config.ts   # Vite configuration
-├── server/         # Backend
-│   ├── controllers/   # API controllers
-│   ├── models/        # MongoDB models
-│   ├── routes/        # API routes
-│   ├── server.js      # Express app setup
-│   └── .env.example   # Environment variables example
-├── README.md       # Project documentation
-└── package.json    # Root package file
+├── client/               # Frontend
+│   ├── public/           # Static assets
+│   ├── src/              # React components, pages, styles
+│   └── vite.config.ts    # Vite configuration
+├── server/               # Backend
+│   ├── controllers/      # API controllers
+│   ├── models/           # MongoDB models
+│   ├── routes/           # API routes
+│   ├── server.js         # Express app setup
+│   └── .env.example      # Environment variables example
+├── README.md             # Project documentation
+└── package.json          # Root package file
+
 Contributing
 Contributions are welcome! Feel free to submit a pull request or open an issue to discuss potential changes.
 
