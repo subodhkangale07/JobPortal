@@ -35,7 +35,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='bg-white shadow-md fixed top-0 left-0 w-full z-50 mb-10'>
+        <div className='bg-white shadow-md fixed top-0 left-0 w-full z-50'>
             <div className='flex justify-between items-center mx-auto max-w-7xl h-16 px-4'>
                 {/* Brand Name */}
                 <h1 className='text-2xl font-bold cursor-pointer' onClick={() => navigate('/')}>
@@ -48,7 +48,7 @@ const Navbar = () => {
                 </button>
 
                 {/* Navigation Links and User Actions */}
-                <div className={`flex-col md:flex md:flex-row md:items-center md:gap-8 ${isMenuOpen ? 'flex' : 'hidden md:flex'}`}>
+                <div className={`flex-col md:flex md:flex-row md:items-center md:gap-8 ${isMenuOpen ? 'flex' : 'hidden md:flex'} w-full md:w-auto`}>
                     <ul className='flex flex-col md:flex-row font-medium items-center gap-5'>
                         {user && user.role === 'recruiter' ? (
                             <>
@@ -74,7 +74,7 @@ const Navbar = () => {
                         )}
                     </ul>
 
-                    {/* Conditional Rendering for Authenticated/Unauthenticated User */}
+                    {/* Authenticated/Unauthenticated User Actions */}
                     {!user ? (
                         <div className='flex flex-col md:flex-row gap-3 mt-4 md:mt-0'>
                             <Link to='/login'>

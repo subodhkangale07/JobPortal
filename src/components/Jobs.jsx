@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import Navbar from './shared/navbar';
 import Job from './Job';
 import FilterJob from './FilterJob';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 const Jobs = () => {
     const { allJobs, searchedQuery } = useSelector(store => store.job);
     
-    // Use useMemo to memoize the filtered jobs
+    // Memoize filtered jobs to avoid re-filtering on every render
     const filterJobs = useMemo(() => {
         if (!searchedQuery) return allJobs;
 
@@ -22,19 +22,19 @@ const Jobs = () => {
     return (
         <div>
             <Navbar />
-            <div className='max-w-7xl mx-auto mt-5'>
-                <div className='flex gap-5'>
-                    <div className='w-1/5 mt-11'>
-                        {/* Left side filter component */}
+            <div className='max-w-7xl mx-auto mt-5 px-4'>
+                <div className='flex flex-col lg:flex-row gap-5'>
+                    {/* Left side filter component */}
+                    <div className='lg:w-1/5 w-full lg:mt-11'>
                         <FilterJob />
                     </div>
 
                     {/* Right side job cards */}
-                    <div className='flex-1 h-[88vh] overflow-y-auto pb-5 mt-11'>
+                    <div className='flex-1 h-[88vh] overflow-y-auto pb-5 lg:mt-11 mt-5'>
                         {filterJobs.length <= 0 ? (
-                            <span>Job Not Found</span>
+                            <span className='text-center'>Job Not Found</span>
                         ) : (
-                            <div className='grid grid-cols-3 gap-4'>
+                            <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                                 {filterJobs.map(job => (
                                     <motion.div 
                                         key={job?._id}
