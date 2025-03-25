@@ -32,7 +32,7 @@ const Jobs = () => {
                     {/* Right side job cards */}
                     <div className='flex-1 h-[88vh] overflow-y-auto pb-5 lg:mt-11 mt-5'>
                         {filterJobs.length <= 0 ? (
-                            <span className='text-center'>Job Not Found</span>
+                            <span className='text-center flex flex-col items-center justify-center min-h-screen gap-5'>Job Not Found</span>
                         ) : (
                             <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
                                 {filterJobs.map(job => (

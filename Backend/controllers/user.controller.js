@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
 import {uploadImageToCloudinary} from '../utils/imageUploader.js'
+
 export const register = async (req, res) => {
     try {
         const { fullName, email, phoneNumber, password, role } = req.body; // Fetch all from req body
