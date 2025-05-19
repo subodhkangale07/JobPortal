@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../assets/jobhunt.png';
+import logo from '../../assets/logo.png';
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
