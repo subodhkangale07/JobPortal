@@ -24,7 +24,7 @@ const CategoryCarousel = () => {
   }
 
   return (
-    <div className='my-20'>
+    <div>
       <Carousel className='w-full max-w-3xl mx-auto'>
         <CarouselContent>
           {categories.map((cat, index) => (

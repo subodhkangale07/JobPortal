@@ -9,7 +9,7 @@ import jobRoute from './route/job.route.js';
 import applicationRoute from './route/application.route.js';
 import fileUpload from 'express-fileupload'; // For handling file uploads
 import bodyParser  from 'body-parser';
-import multer   from 'multer';//
+import multer   from 'multer';// 
 
 dotenv.config({}); // Load environment variables
 

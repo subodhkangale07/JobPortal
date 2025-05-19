@@ -108,40 +108,45 @@ export const getApplicants = async(req,res) => {
     }
 }
 
-// update jobb status
-
-export const updateStatus = async (req,res) =>{
-    try{
-        const {status} = req.body;
+// Fixed updateStatus controller function
+export const updateStatus = async (req, res) => {
+    try {
+        const { status } = req.body;
         const applicationId = req.params.id;
 
-        if(!status){
+        if (!status) {
             return res.status(400).json({
-                message:"Status is required",
-                success:false
-            })
+                message: "Status is required",
+                success: false
+            });
         }
 
-        // find applocatin by applicantionID
-        const application = await Application.findOne({_id:applicationId});
-        if(!application){
-            return res.status(400).json({
-                message:"Applicantion not found",
-                success:false
-            })
+        // Find application by applicationID
+        const application = await Application.findOne({ _id: applicationId });
+        if (!application) {
+            return res.status(404).json({
+                message: "Application not found",
+                success: false
+            });
         }
 
-        // update status
-        application.status = status.toLowerCase();
+        // Update status (maintain the original case from the frontend)
+        application.status = status; // Don't convert to lowercase
         await application.save();
 
-        return res.status(201).json({
-            message:"Status updated successfully",
-            success:true
-        })
+        // Return the updated application for the frontend
+        return res.status(200).json({
+            message: "Status updated successfully",
+            success: true,
+            updatedApplication: application
+        });
 
-
-    } catch(error){
+    } catch (error) {
         console.log(error);
+        // Always return an error response
+        return res.status(500).json({
+            message: "Failed to update status: " + error.message,
+            success: false
+        });
     }
 }

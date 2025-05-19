@@ -15,6 +15,7 @@ import AdminJobs from './components/admin/AdminJobs'
 import PostJob from './components/admin/PostJob'
 import Applicants from './components/admin/Applicants'
 import ProtectedRoute from './components/admin/protectedRoute'
+import SalaryCalculator from './components/SalaryCalculator'
 
 
 
@@ -51,6 +52,11 @@ const appRoute = createBrowserRouter([
     path:'/profile',
     element:<Profile/>
   },
+{
+  path:'/salary',
+  element:<SalaryCalculator/>
+},
+
 
   // below all paths for admin
   {

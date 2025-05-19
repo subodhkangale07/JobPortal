@@ -1,5 +1,4 @@
 import { setAllAppliedJobs } from "@/redux/jobSlice";
-import { apiConnector } from "@/services/apiConnector";
 import { APPLICATION_API_END_POINT } from "@/utils/constant";
 import axios from "axios";
 import { useEffect } from "react";
@@ -9,28 +8,40 @@ const useGetAppliedJobs = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        //  co
-         const cookies = document.cookie;
-         console.log("Cookie ", cookies);
-         
-        const fetchAppliedJosb = async () => {
+        const fetchAppliedJobs = async () => {
             try {
-                  const url = APPLICATION_API_END_POINT + '/get';
-                // const result = await   apiConnector(url,'GET',{
-
-                // })
                 const token = localStorage.getItem('token');
-                const res = await axios.get(`${APPLICATION_API_END_POINT}/get`,{headers:{
-                    "Content-Type": "multipart/form-data",
-                    Authorization: `Bearer ${token}`,
-                }},{withCredentials:true});
-                dispatch(setAllAppliedJobs(res.data.application));
+                if (!token) {
+                    console.error("No authentication token found");
+                    return;
+                }
+                
+                console.log("Fetching applied jobs with token:", token ? "Token exists" : "No token");
+                
+                const response = await axios.get(`${APPLICATION_API_END_POINT}/get`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    },
+                    withCredentials: true
+                });
+                
+                console.log("Applied jobs API response:", response.data);
+                
+                if (response.data && response.data.application) {
+                    dispatch(setAllAppliedJobs(response.data.application));
+                } else {
+                    console.warn("Received response but no application data found:", response.data);
+                }
             } catch (error) {
-                console.log(error);
+                console.error("Error fetching applied jobs:", error.response?.data || error.message);
+                // Optionally dispatch an error action here
             }
-        }
-        fetchAppliedJosb();
-    },[])
-}
+        };
+        
+        fetchAppliedJobs();
+    }, [dispatch]);
+    
+    return null; // You can return something useful here if needed
+};
 
-export default useGetAppliedJobs
+export default useGetAppliedJobs;
