@@ -7,14 +7,14 @@ import Job from './Job';
 import { Search, Filter, MapPin } from 'lucide-react';
 import Footer from './shared/Footer';
 
-const Browse = () => {
+const Browse = () => { 
   const [filterOpen, setFilterOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilters, setSelectedFilters] = useState({
     fullTime: false,
     remote: false,
     entry: false,
-    experienced: false
+    experienced: false 
   });
 
   useGetAllJobs();
